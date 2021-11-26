@@ -36,7 +36,7 @@ public class SwingImageDisplay extends JPanel implements ImageDisplay {
         this.image = image;
         this.removeAll();
         this.add(imagePanel());
-        
+        this.updateUI();
     }
 
     private Component imagePanel() {
@@ -54,5 +54,10 @@ public class SwingImageDisplay extends JPanel implements ImageDisplay {
                 return ImageIO.read(new ByteArrayInputStream(image.bitmap()));
             } 
         };
-    }    
+    }
+
+    public Image getImage() {
+        return image;
+    }
+    
 }

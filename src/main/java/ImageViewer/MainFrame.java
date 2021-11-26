@@ -5,10 +5,15 @@
  */
 package ImageViewer;
 
+import Presenter.Command;
 import View.UI.swing.SwingImageDisplay;
+import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.PopupMenu;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -16,7 +21,8 @@ import javax.swing.JFrame;
  */
 public class MainFrame extends JFrame{
 
-    SwingImageDisplay imageDisplay;
+    private SwingImageDisplay imageDisplay;
+    Map<String,Command> map = new HashMap<String,Command>();
     
     public MainFrame() {
         this.setTitle("Image Viewer");
@@ -24,8 +30,14 @@ public class MainFrame extends JFrame{
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.add(image());
+        //this.add(toolbar(),BorderLayout.SOUTH);
+        this.setVisible(true);
     }
-
+    
+    public void add(Command command){
+        map.put(command.name(), command);
+    }
+    
     private Component image() {
         SwingImageDisplay swingImageDisplay = new SwingImageDisplay();
         this.imageDisplay = swingImageDisplay;
@@ -34,6 +46,20 @@ public class MainFrame extends JFrame{
 
     public SwingImageDisplay getImageDisplay() {
         return imageDisplay;
+    }
+
+    private Component toolbar() {
+        JPanel panel = new JPanel();
+        panel.add(button("next"));
+        panel.add(button("prev"));
+        
+        
+        return panel;
+    }
+
+    private Component button(String name) {
+        JButton button = new JButton(name);
+        return button;
     }
     
     
