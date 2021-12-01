@@ -9,6 +9,8 @@ import Presenter.Command;
 import View.UI.swing.SwingImageDisplay;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JButton;
@@ -22,7 +24,7 @@ import javax.swing.JPanel;
 public class MainFrame extends JFrame{
 
     private SwingImageDisplay imageDisplay;
-    Map<String,Command> map = new HashMap<String,Command>();
+    private Map<String,Command> map = new HashMap<String,Command>();
     
     public MainFrame() {
         this.setTitle("Image Viewer");
@@ -30,7 +32,7 @@ public class MainFrame extends JFrame{
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.add(image());
-        //this.add(toolbar(),BorderLayout.SOUTH);
+        this.add(toolbar(),BorderLayout.SOUTH);
         this.setVisible(true);
     }
     
@@ -52,13 +54,16 @@ public class MainFrame extends JFrame{
         JPanel panel = new JPanel();
         panel.add(button("next"));
         panel.add(button("prev"));
-        
-        
+           
         return panel;
     }
 
     private Component button(String name) {
         JButton button = new JButton(name);
+        button.addActionListener((ActionEvent e) -> {
+            Command get = map.get(name);
+            get.execute();
+        });
         return button;
     }
     

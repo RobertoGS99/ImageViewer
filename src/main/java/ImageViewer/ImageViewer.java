@@ -22,8 +22,8 @@ public class ImageViewer {
         ImageLoader imageLoader = new FileImageLoader(path);
         MainFrame mainFrame = new MainFrame();
         mainFrame.getImageDisplay().display(imageLoader.load());
-        Command next = new nextCommand();
-        Command prev = new prevCommand();
+        Command next = new nextCommand(mainFrame,imageLoader);
+        Command prev = new prevCommand(mainFrame,imageLoader);
         mainFrame.add(next);
         mainFrame.add(prev);
         

@@ -5,11 +5,27 @@
  */
 package Presenter;
 
+import ImageViewer.MainFrame;
+import Model.Image;
+import View.UI.swing.SwingImageDisplay;
+import View.persistence.ImageLoader;
+import View.persistence.files.FileImageLoader;
+
 /**
  *
  * @author Admin
  */
 public class nextCommand implements Command {
+    
+    private MainFrame mf;
+    private SwingImageDisplay sid;
+    private FileImageLoader fil;
+
+    public nextCommand(MainFrame mainFrame,ImageLoader fileImageLoader) {
+        mf = mainFrame;
+        sid = mainFrame.getImageDisplay();
+        fil = (FileImageLoader) fileImageLoader;
+    }
 
     @Override
     public String name() {
@@ -18,7 +34,7 @@ public class nextCommand implements Command {
 
     @Override
     public void execute() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        sid.display(sid.getImage().next());
     }
     
 }

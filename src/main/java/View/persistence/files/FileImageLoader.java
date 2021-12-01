@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class FileImageLoader implements ImageLoader {
     private final  File[] files;
-    private final String[] ImageExtensions = {"jpg","png","bmp"};
+    private final String[] ImageExtensions = {"jpg","png","bmp","jpeg"};
 
     public FileImageLoader(String folder) {
         this.files = new File(folder).listFiles(whitImageExtensions());
